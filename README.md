@@ -17,14 +17,6 @@ Production-focused, minimal Next.js + TypeScript resume editor that keeps all co
 - TipTap editor
 - Conversion libraries: `mammoth`, `html-docx-js`, LibreOffice (`soffice`), Puppeteer fallback
 
-## Security/dependency notes
-- Next.js and Puppeteer versions were bumped to patched/supported versions to address prior install warnings.
-- Run these regularly in your own environment:
-  ```bash
-  npm audit
-  npm audit fix
-  ```
-
 ## Project structure
 - `pages/index.tsx` UI for upload/edit/download
 - `components/Editor.tsx` TipTap editor wrapper
@@ -41,57 +33,25 @@ Production-focused, minimal Next.js + TypeScript resume editor that keeps all co
    ```bash
    npm install
    ```
-2. Install LibreOffice and fonts:
-
-### Linux (Ubuntu/Debian)
-```bash
-sudo apt-get update
-sudo apt-get install -y libreoffice fonts-dejavu-core
-```
-
-### Windows (PowerShell, no `sudo`)
-If you saw `Sudo is disabled on this machine`, that's expected on Windows PowerShell.
-Use one of these instead:
-
-```powershell
-winget install -e --id TheDocumentFoundation.LibreOffice
-```
-
-or
-
-```powershell
-choco install libreoffice-fresh -y
-```
-
-Then verify:
-```powershell
-soffice --version
-```
-
+2. Install LibreOffice and Chromium dependencies:
+   - Ubuntu/Debian:
+     ```bash
+     sudo apt-get update
+     sudo apt-get install -y libreoffice fonts-dejavu-core
+     ```
 3. Optional env vars:
-
-### Linux/macOS
-```bash
-export TEMP_DIR=./tmp
-export MAX_UPLOAD_BYTES=10485760
-export RATE_LIMIT_PER_MINUTE=30
-```
-
-### Windows PowerShell
-```powershell
-$env:TEMP_DIR = "./tmp"
-$env:MAX_UPLOAD_BYTES = "10485760"
-$env:RATE_LIMIT_PER_MINUTE = "30"
-```
-
+   ```bash
+   export TEMP_DIR=./tmp
+   export MAX_UPLOAD_BYTES=10485760
+   export RATE_LIMIT_PER_MINUTE=30
+   ```
 4. Start app:
    ```bash
    npm run dev
    ```
 5. Open http://localhost:3000
 
-## Docker run (recommended on Windows)
-If local LibreOffice setup is difficult on Windows, use Docker:
+## Docker run
 ```bash
 docker compose up --build
 ```
